@@ -1,7 +1,7 @@
 "use client";
 
 import React, { createContext, useContext, useState, useEffect } from "react";
-import { MenuItem } from "@/config/menu";
+import { MenuItem, PriceUnit } from "@/config/menu";
 
 export interface CartItem {
   id: string;
@@ -10,19 +10,23 @@ export interface CartItem {
   quantity: number;
   category: string;
   image: string;
-  unit?: string;
+  priceUnit: PriceUnit;
+  quantityUnit: PriceUnit;
+  step: number;
+  minQuantity: number;
 }
 
 interface CartContextType {
   items: CartItem[];
   isCartOpen: boolean;
   setIsCartOpen: (open: boolean) => void;
-  addItem: (item: MenuItem, quantity?: number) => void;
+  addItem: (item: MenuItem, customQuantity?: number) => void;
   removeItem: (id: string) => void;
   updateQuantity: (id: string, delta: number) => void;
   clearCart: () => void;
   getItemQuantity: (id: string) => number;
-  totalItems: number;
+  getItemUnit: (id: string) => PriceUnit | undefined;
+  totalLines: number;
   totalPrice: number;
 }
 
@@ -66,12 +70,20 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   }, [items, isLoaded]);
 
-  const addItem = (item: MenuItem, quantity: number = 1) => {
+  const addItem = (item: MenuItem, customQuantity?: number) => {
+    // Se o item não possui preço numérico, não pode ser somado ao carrinho diretamente
+    if (item.price === null) return;
+
+    const step = item.step || (item.quantityUnit === "KG" ? 0.5 : 1);
+    const minQty = item.minQuantity || (item.quantityUnit === "KG" ? 1.0 : 1);
+    const initialQty = customQuantity ?? minQty;
+
     setItems((prev) => {
       const existing = prev.find((i) => i.id === item.id);
       if (existing) {
+        const nextQty = Math.round((existing.quantity + step) * 10) / 10;
         return prev.map((i) =>
-          i.id === item.id ? { ...i, quantity: i.quantity + quantity } : i
+          i.id === item.id ? { ...i, quantity: nextQty } : i
         );
       }
       return [
@@ -79,11 +91,14 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
         {
           id: item.id,
           name: item.name,
-          price: item.price,
-          quantity,
+          price: item.price as number,
+          quantity: initialQty,
           category: item.category,
           image: item.image,
-          unit: item.unit,
+          priceUnit: item.priceUnit,
+          quantityUnit: item.quantityUnit,
+          step,
+          minQuantity: minQty,
         },
       ];
     });
@@ -99,8 +114,8 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
       return prev
         .map((i) => {
           if (i.id === id) {
-            const newQ = i.quantity + delta;
-            return newQ > 0 ? { ...i, quantity: newQ } : null;
+            const nextQty = Math.round((i.quantity + delta) * 10) / 10;
+            return nextQty > 0 ? { ...i, quantity: nextQty } : null;
           }
           return i;
         })
@@ -115,8 +130,19 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     return item ? item.quantity : 0;
   };
 
-  const totalItems = items.reduce((sum, item) => sum + item.quantity, 0);
-  const totalPrice = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  const getItemUnit = (id: string): PriceUnit | undefined => {
+    const item = items.find((i) => i.id === id);
+    return item?.quantityUnit;
+  };
+
+  // Quantidade de tipos de produtos no carrinho
+  const totalLines = items.length;
+
+  // Valor total seguro com 2 casas decimais
+  const totalPrice = items.reduce((sum, item) => {
+    const itemTotal = Math.round(item.price * item.quantity * 100) / 100;
+    return sum + itemTotal;
+  }, 0);
 
   return (
     <CartContext.Provider
@@ -129,7 +155,8 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
         updateQuantity,
         clearCart,
         getItemQuantity,
-        totalItems,
+        getItemUnit,
+        totalLines,
         totalPrice,
       }}
     >

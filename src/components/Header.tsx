@@ -10,7 +10,7 @@ import { MapPin, Phone, MessageCircle, Menu, X, Clock, ShoppingBag } from "lucid
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const { totalItems, totalPrice, setIsCartOpen } = useCart();
+  const { totalLines, totalPrice, setIsCartOpen } = useCart();
 
   const navLinks = [
     { label: "Início", href: "#inicio" },
@@ -95,12 +95,12 @@ export default function Header() {
             aria-label="Abrir pedido e carrinho"
           >
             <ShoppingBag className="w-4 h-4 text-terracotta-600" />
-            {totalItems > 0 ? (
-              <span>{totalItems} {totalItems === 1 ? "item" : "itens"} • {formatPrice(totalPrice)}</span>
+            {totalLines > 0 ? (
+              <span>{totalLines} {totalLines === 1 ? "produto" : "produtos"} • {formatPrice(totalPrice)}</span>
             ) : (
               <span>Ver Pedido</span>
             )}
-            {totalItems > 0 && (
+            {totalLines > 0 && (
               <span className="w-2 h-2 rounded-full bg-terracotta-600 animate-pulse" />
             )}
           </button>
@@ -127,9 +127,9 @@ export default function Header() {
             aria-label="Abrir carrinho"
           >
             <ShoppingBag className="w-4 h-4 text-terracotta-600" />
-            {totalItems > 0 && (
+            {totalLines > 0 && (
               <span className="absolute -top-1 -right-1 w-4 h-4 bg-terracotta-600 text-white text-[10px] font-bold rounded-full flex items-center justify-center">
-                {totalItems}
+                {totalLines}
               </span>
             )}
           </button>
@@ -185,7 +185,7 @@ export default function Header() {
               className="w-full flex items-center justify-center gap-2 bg-cream-50 border border-borderWarm text-brown-950 py-2.5 rounded-md font-semibold text-sm shadow-2xs"
             >
               <ShoppingBag className="w-4 h-4 text-terracotta-600" />
-              <span>Ver Pedido ({totalItems} {totalItems === 1 ? "item" : "itens"})</span>
+              <span>Ver Pedido ({totalLines} {totalLines === 1 ? "produto" : "produtos"})</span>
             </button>
 
             <a

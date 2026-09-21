@@ -5,7 +5,7 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Trash2, Plus, Minus, ShoppingBag, ArrowRight } from "lucide-react";
 import { useCart } from "@/context/CartContext";
-import { formatPrice, buildWhatsAppOrderLink } from "@/config/menu";
+import { formatPrice, formatPricePerUnit, formatQuantityWithUnit, buildWhatsAppOrderLink } from "@/config/menu";
 
 export default function CartDrawer() {
   const {
@@ -16,7 +16,7 @@ export default function CartDrawer() {
     removeItem,
     clearCart,
     totalPrice,
-    totalItems,
+    totalLines,
   } = useCart();
 
   const handleCheckout = () => {
@@ -45,7 +45,7 @@ export default function CartDrawer() {
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
             transition={{ type: "spring", damping: 28, stiffness: 260 }}
-            className="fixed top-0 right-0 h-full w-full sm:w-[420px] bg-cream-50 text-brown-950 z-50 flex flex-col shadow-2xl border-l border-borderWarm"
+            className="fixed top-0 right-0 h-full w-full sm:w-[440px] bg-cream-50 text-brown-950 z-50 flex flex-col shadow-2xl border-l border-borderWarm"
             aria-label="Carrinho de compras"
           >
             {/* Topo do Drawer */}
@@ -57,7 +57,7 @@ export default function CartDrawer() {
                 <div>
                   <h2 className="font-serif text-lg font-bold text-brown-950">Seu Pedido</h2>
                   <span className="text-xs text-brown-600">
-                    {totalItems} {totalItems === 1 ? "item adicionado" : "itens adicionados"}
+                    {totalLines} {totalLines === 1 ? "produto adicionado" : "produtos adicionados"}
                   </span>
                 </div>
               </div>
@@ -80,9 +80,9 @@ export default function CartDrawer() {
                     <ShoppingBag className="w-8 h-8 opacity-40" />
                   </div>
                   <div className="space-y-1 max-w-xs">
-                    <h3 className="font-serif text-lg font-bold text-brown-900">Seu carrinho está vazio</h3>
+                    <h3 className="font-serif text-lg font-bold text-brown-900">Seu pedido está vazio</h3>
                     <p className="text-xs text-brown-600 leading-relaxed">
-                      Navegue pelo nosso cardápio e adicione pães fresquinhos, bolos e doces para o seu pedido.
+                      Navegue pelo nosso cardápio e adicione docinhos, bolos recheados por quilo, salgados e baguetes.
                     </p>
                   </div>
                   <button
@@ -100,73 +100,77 @@ export default function CartDrawer() {
                 </div>
               ) : (
                 <div className="space-y-4">
-                  {items.map((item) => (
-                    <div
-                      key={item.id}
-                      className="flex items-center gap-3.5 p-3.5 bg-cream-100/50 rounded-lg border border-borderWarm/70 shadow-2xs"
-                    >
-                      {/* Miniatura */}
-                      <div className="relative w-16 h-16 rounded-md overflow-hidden bg-brown-900 shrink-0 border border-borderWarm">
-                        <Image
-                          src={item.image}
-                          alt={item.name}
-                          fill
-                          className="object-cover"
-                          sizes="64px"
-                        />
-                      </div>
+                  {items.map((item) => {
+                    const itemSubtotal = Math.round(item.price * item.quantity * 100) / 100;
 
-                      {/* Dados do Item */}
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-start justify-between gap-2">
-                          <h4 className="font-serif text-sm font-bold text-brown-950 truncate">
-                            {item.name}
-                          </h4>
-                          <button
-                            type="button"
-                            onClick={() => removeItem(item.id)}
-                            className="text-brown-400 hover:text-red-600 p-1 transition-colors shrink-0"
-                            aria-label={`Remover ${item.name}`}
-                          >
-                            <Trash2 className="w-3.5 h-3.5" />
-                          </button>
+                    return (
+                      <div
+                        key={item.id}
+                        className="flex items-center gap-3.5 p-3.5 bg-cream-100/50 rounded-lg border border-borderWarm/70 shadow-2xs"
+                      >
+                        {/* Miniatura */}
+                        <div className="relative w-16 h-16 rounded-md overflow-hidden bg-brown-900 shrink-0 border border-borderWarm">
+                          <Image
+                            src={item.image}
+                            alt={item.name}
+                            fill
+                            className="object-cover"
+                            sizes="64px"
+                          />
                         </div>
 
-                        <p className="text-xs text-brown-600">
-                          {formatPrice(item.price)} {item.unit && `• ${item.unit}`}
-                        </p>
-
-                        {/* Controles de Quantidade e Subtotal */}
-                        <div className="flex items-center justify-between mt-2.5">
-                          <div className="flex items-center border border-borderWarm rounded-md bg-cream-50">
+                        {/* Dados do Item */}
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-start justify-between gap-2">
+                            <h4 className="font-serif text-sm font-bold text-brown-950 truncate">
+                              {item.name}
+                            </h4>
                             <button
                               type="button"
-                              onClick={() => updateQuantity(item.id, -1)}
-                              className="p-1.5 text-brown-700 hover:text-terracotta-600 hover:bg-cream-200/50 transition-colors"
-                              aria-label="Diminuir quantidade"
+                              onClick={() => removeItem(item.id)}
+                              className="text-brown-400 hover:text-red-600 p-1 transition-colors shrink-0"
+                              aria-label={`Remover ${item.name}`}
                             >
-                              <Minus className="w-3 h-3" />
-                            </button>
-                            <span className="text-xs font-semibold text-brown-950 w-6 text-center">
-                              {item.quantity}
-                            </span>
-                            <button
-                              type="button"
-                              onClick={() => updateQuantity(item.id, 1)}
-                              className="p-1.5 text-brown-700 hover:text-terracotta-600 hover:bg-cream-200/50 transition-colors"
-                              aria-label="Aumentar quantidade"
-                            >
-                              <Plus className="w-3 h-3" />
+                              <Trash2 className="w-3.5 h-3.5" />
                             </button>
                           </div>
 
-                          <span className="font-serif font-bold text-sm text-brown-950">
-                            {formatPrice(item.price * item.quantity)}
-                          </span>
+                          <p className="text-xs text-brown-600">
+                            {formatPricePerUnit(item.price, item.priceUnit)}
+                          </p>
+
+                          {/* Controles de Quantidade e Subtotal */}
+                          <div className="flex items-center justify-between mt-2.5">
+                            <div className="flex items-center border border-borderWarm rounded-md bg-cream-50">
+                              <button
+                                type="button"
+                                onClick={() => updateQuantity(item.id, -item.step)}
+                                className="p-1.5 text-brown-700 hover:text-terracotta-600 hover:bg-cream-200/50 transition-colors"
+                                aria-label="Diminuir quantidade"
+                              >
+                                <Minus className="w-3 h-3" />
+                              </button>
+                              <span className="text-xs font-semibold text-brown-950 px-2 min-w-[48px] text-center">
+                                {formatQuantityWithUnit(item.quantity, item.quantityUnit)}
+                              </span>
+                              <button
+                                type="button"
+                                onClick={() => updateQuantity(item.id, item.step)}
+                                className="p-1.5 text-brown-700 hover:text-terracotta-600 hover:bg-cream-200/50 transition-colors"
+                                aria-label="Aumentar quantidade"
+                              >
+                                <Plus className="w-3 h-3" />
+                              </button>
+                            </div>
+
+                            <span className="font-serif font-bold text-sm text-brown-950">
+                              {formatPrice(itemSubtotal)}
+                            </span>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  ))}
+                    );
+                  })}
 
                   {/* Limpar carrinho */}
                   <div className="pt-2 text-right">
@@ -175,7 +179,7 @@ export default function CartDrawer() {
                       onClick={clearCart}
                       className="text-[11px] text-brown-500 hover:text-red-600 underline transition-colors"
                     >
-                      Limpar carrinho
+                      Limpar pedido
                     </button>
                   </div>
                 </div>
@@ -187,11 +191,11 @@ export default function CartDrawer() {
               <div className="p-5 border-t border-borderWarm bg-cream-100/80 space-y-4">
                 <div className="space-y-1.5 text-sm">
                   <div className="flex items-center justify-between text-brown-600 text-xs">
-                    <span>Quantidade total:</span>
-                    <span className="font-semibold text-brown-900">{totalItems} itens</span>
+                    <span>Produtos no pedido:</span>
+                    <span className="font-semibold text-brown-900">{totalLines} {totalLines === 1 ? "item" : "itens"}</span>
                   </div>
                   <div className="flex items-center justify-between pt-1 border-t border-borderWarm/60">
-                    <span className="font-serif text-base font-bold text-brown-950">Valor Total:</span>
+                    <span className="font-serif text-base font-bold text-brown-950">Total Estimado:</span>
                     <span className="font-serif text-2xl font-bold text-terracotta-600">
                       {formatPrice(totalPrice)}
                     </span>
