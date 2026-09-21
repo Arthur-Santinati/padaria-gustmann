@@ -28,7 +28,11 @@ export const metadata: Metadata = {
   creator: "Padaria Gustmann",
   publisher: "Padaria Gustmann",
   icons: {
-    icon: "/favicon.svg",
+    icon: [
+      { url: "/favicon.png", type: "image/png" },
+      { url: "/favicon.ico" },
+    ],
+    apple: "/favicon.png",
   },
   formatDetection: {
     telephone: true,

@@ -46,7 +46,7 @@ export default function SplashScreen() {
             {/* Logo Oficial Transparente */}
             <div className="relative w-44 h-32 sm:w-56 sm:h-40 mb-3">
               <Image
-                src="/images/logo.png"
+                src="/images/preloader-logo.png"
                 alt="Padaria Gustmann"
                 fill
                 className="object-contain"
