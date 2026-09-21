@@ -33,8 +33,7 @@ export interface SiteConfig {
   categories: Array<{
     id: string;
     name: string;
-    subtitle: string;
-    description: string;
+    shortDescription: string;
     image: string;
     badge: string;
   }>;
@@ -50,7 +49,7 @@ export const siteConfig: SiteConfig = {
   name: "Padaria Gustmann",
   legalName: "Padaria e Confeitaria Gustmann",
   tagline: "Padaria e Confeitaria",
-  description: "Padaria Gustmann em Americana - SP. Pães fresquinhos todos os dias, confeitaria e sabores que fazem a diferença com 16 anos de tradição.",
+  description: "Padaria Gustmann em Americana - SP. Pães fresquinhos, confeitaria e sabores feitos com tradição e qualidade.",
   yearsOfTradition: 16,
   highlightPhrase: "Qualidade e sabor que fazem a diferença",
   
@@ -78,88 +77,85 @@ export const siteConfig: SiteConfig = {
 
   openingHoursPlaceholder: {
     status: "A confirmar com o estabelecimento",
-    note: "Para confirmar o horário de funcionamento de hoje ou disponibilidade para fornadas e encomendas, fale conosco diretamente pelo WhatsApp.",
+    note: "Para confirmar o horário de funcionamento de hoje ou a disponibilidade de fornadas, fale conosco pelo WhatsApp.",
   },
 
+  // Categorias visuais simplificadas e diretas conforme solicitado
   categories: [
     {
       id: "paes",
       name: "Pães",
-      subtitle: "Fornos quentes e massa tradicional",
-      description: "Pães fresquinhos todos os dias, com casca dourada e miolo macio para o seu café da manhã e lanche.",
+      shortDescription: "Fresquinhos todos os dias.",
       image: "/images/paes.jpg",
-      badge: "Fornadas Diárias",
+      badge: "Fornadas diárias",
     },
     {
       id: "bolos",
       name: "Bolos",
-      subtitle: "Receitas caseiras e de confeitaria",
-      description: "Bolos fofinhos para o café da tarde e receitas preparadas com todo o carinho e sabor.",
+      shortDescription: "Para o café, para comemorar ou simplesmente para adoçar o dia.",
       image: "/images/bolos.jpg",
       badge: "Confeitaria",
     },
     {
       id: "doces",
-      name: "Doces e Sobremesas",
-      subtitle: "Para adoçar qualquer momento",
-      description: "Variedade em doces tradicionais, tortas e sobremesas feitas para quem valoriza sabor e qualidade.",
+      name: "Doces",
+      shortDescription: "Feitos para deixar qualquer momento mais gostoso.",
       image: "/images/doces.jpg",
-      badge: "Doces Artesanais",
+      badge: "Doces & Sobremesas",
     },
     {
       id: "salgados",
       name: "Salgados",
-      subtitle: "Assados e fritos selecionados",
-      description: "Salgados saborosos, quentinhos e bem recheados para sua pausa do dia ou para levar para casa.",
+      shortDescription: "Opções para o café e para aquele lanche rápido.",
       image: "/images/salgados.jpg",
-      badge: "Sabor Tradicional",
+      badge: "Salgados",
     },
     {
       id: "cafe-lanches",
-      name: "Café / Lanches",
-      subtitle: "Para começar o dia com energia",
-      description: "A clássica combinação do cafezinho brasileiro com pão na chapa e delícias de balcão.",
+      name: "Café e Lanches",
+      shortDescription: "Aquele cafezinho passado e delícias rápidas para a sua pausa.",
       image: "/images/cafe.jpg",
-      badge: "Momento Gostoso",
+      badge: "Balcão & Café",
     },
   ],
 
+  // Galeria de fotos da Padaria Gustmann
   gallery: [
     {
-      title: "Pães Rústicos e Tradicionais",
+      title: "Pães do Dia",
       category: "Pães",
       image: "/images/gallery-1.jpg",
-      alt: "Pães artesanais com crosta dourada na Padaria Gustmann",
+      alt: "Pães artesanais na Padaria Gustmann",
     },
     {
-      title: "Doces e Confeitaria Fina",
+      title: "Confeitaria e Sobremesas",
       category: "Doces",
       image: "/images/gallery-2.jpg",
-      alt: "Doces e sobremesas da Padaria Gustmann",
+      alt: "Doces e sobremesas na vitrine da Padaria Gustmann",
     },
     {
-      title: "Café Especial e Acolhimento",
+      title: "Momento do Café",
       category: "Café",
       image: "/images/gallery-3.jpg",
-      alt: "Xícara de café quente e clima acolhedor",
+      alt: "Café fresco servido na Padaria Gustmann",
     },
     {
-      title: "Fornada Diária de Pão Francês",
-      category: "Fornadas",
+      title: "Cesta de Pães Frescos",
+      category: "Pães",
       image: "/images/gallery-4.jpg",
-      alt: "Cesta de pães frescos crocantes",
+      alt: "Fornada de pães na Padaria Gustmann",
     },
     {
-      title: "Bolos e Tortas de Vitrine",
+      title: "Bolos para Comemorações",
       category: "Bolos",
       image: "/images/gallery-5.jpg",
-      alt: "Bolos e delícias de confeitaria",
+      alt: "Bolos da confeitaria Gustmann",
     },
     {
-      title: "Salgados Quentinhos de Balcão",
+      title: "Salgados Quentinhos",
       category: "Salgados",
       image: "/images/gallery-6.jpg",
-      alt: "Salgados e quitutes tradicionais",
+      alt: "Salgados de balcão na Padaria Gustmann",
     },
   ],
 };

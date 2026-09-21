@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 
 function run() {
-  console.log('🔍 Executando verificação completa do build estático da Padaria Gustmann...');
+  console.log('🔍 Executando verificação completa do build estático refinado da Padaria Gustmann...');
 
   const indexPath = path.join(process.cwd(), '.next/server/app/index.html');
   const robotsPath = path.join(process.cwd(), '.next/server/app/robots.txt.body');
@@ -48,22 +48,27 @@ function run() {
   assert(html.includes('Fresquinho todos os dias, do jeito que você gosta.'), 'Headline principal do Hero');
   assert(html.includes('Há 16 anos levando pães, doces e sabores que fazem parte da rotina de Americana.'), 'Subheadline do Hero');
   assert(html.includes('Feito para todos os momentos do dia.'), 'Título da seção de produtos');
-  assert(html.includes('Pães') && html.includes('Bolos') && html.includes('Doces e Sobremesas') && html.includes('Salgados') && html.includes('Café / Lanches'), 'Todas as 5 categorias de produtos confirmadas presentes');
-  assert(html.includes('16 anos fazendo parte da sua rotina.'), 'Título da seção sobre nós');
-  assert(html.includes('A Padaria Gustmann reúne tradição, produtos fresquinhos e o cuidado de quem acredita que qualidade e sabor fazem a diferença.'), 'Texto institucional fiel');
+  assert(html.includes('Pães') && html.includes('Bolos') && html.includes('Doces') && html.includes('Salgados'), 'Categorias confirmadas presentes');
+  assert(html.includes('Há 16 anos fazendo parte da sua rotina.'), 'Título da seção sobre nós');
+  assert(html.includes('Há 16 anos, a Padaria Gustmann faz parte da rotina de famílias de Americana.'), 'Texto institucional fiel e humano');
   assert(html.includes('Rua Lindóia, 410') && html.includes('Parque Novo Mundo') && html.includes('13467-640'), 'Endereço completo exato');
   assert(html.includes('Deu vontade? Fale com a gente.'), 'CTA Final');
 
-  console.log('\n--- 4. TESTE DE PLACEHOLDERS PREPARADOS ---');
-  assert(html.includes('Horário de Atendimento') || html.includes('A confirmar com o estabelecimento'), 'Área de horário de funcionamento como placeholder explícito');
+  console.log('\n--- 4. TESTE DE REMOÇÃO DE TEXTOS NÃO CONFIRMADOS ---');
+  assert(!html.includes('estacionamento nas imediações'), 'Frase de estacionamento não confirmada foi removida com sucesso');
+  assert(!html.includes('>Pedir<') && !html.includes('>Pedir →<'), 'Botão fake de e-commerce "Pedir" foi removido');
+  assert(html.includes('Consultar pelo WhatsApp'), 'Botão revisado para Consultar pelo WhatsApp');
 
-  console.log('\n--- 5. TESTE DE ROBOTS E SITEMAP ---');
+  console.log('\n--- 5. TESTE DE PLACEHOLDERS PREPARADOS ---');
+  assert(html.includes('Horário de Atendimento') && html.includes('A confirmar com o estabelecimento'), 'Área de horário de funcionamento como placeholder explícito');
+
+  console.log('\n--- 6. TESTE DE ROBOTS E SITEMAP ---');
   assert(robots.includes('sitemap.xml'), 'robots.txt referencia sitemap');
   assert(sitemap.includes('https://www.padariagustmann.com.br'), 'sitemap.xml possui URL canônica');
 
   console.log('\n========================================');
   if (failures === 0) {
-    console.log('🎉 TODOS OS 21 TESTES PASSARAM COM 100% DE SUCESSO!');
+    console.log('🎉 TODOS OS TESTES PASSARAM COM 100% DE SUCESSO!');
   } else {
     console.error(`⚠️ TOTAL DE TESTES COM FALHA: ${failures}`);
     process.exitCode = 1;

@@ -29,15 +29,14 @@ export default function LocationSection() {
         
         {/* Cabeçalho */}
         <div className="text-center max-w-2xl mx-auto mb-12 space-y-3">
-          <div className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-terracotta-600 bg-cream-100 px-3 py-1 rounded-full border border-borderWarm">
-            <MapPin className="w-3.5 h-3.5" />
-            <span>Localização e Contato</span>
+          <div className="inline-block text-xs font-bold uppercase tracking-widest text-terracotta-600 bg-cream-100 px-3 py-1 rounded-full border border-borderWarm">
+            Localização e Contato
           </div>
           <h2 className="font-serif text-3xl sm:text-4xl text-brown-950 font-bold tracking-tight">
             Venha nos visitar.
           </h2>
           <p className="text-base text-brown-700">
-            Estamos de portas abertas em Americana, prontos para receber você e sua família com pão quente e café fresco.
+            Estamos localizados no Parque Novo Mundo, em Americana - SP.
           </p>
         </div>
 
@@ -47,10 +46,10 @@ export default function LocationSection() {
           <div className="lg:col-span-6 space-y-6">
             
             {/* Bloco de Endereço */}
-            <div className="bg-cream-100/70 border border-borderWarm rounded-lg p-6 sm:p-8 space-y-5 shadow-xs">
+            <div className="bg-cream-100/70 border border-borderWarm rounded-lg p-6 sm:p-7 space-y-4 shadow-xs">
               <div>
                 <span className="text-xs uppercase font-bold tracking-wider text-caramel-600">
-                  Endereço Oficial
+                  Endereço
                 </span>
                 <h3 className="font-serif text-2xl font-bold text-brown-950 mt-1">
                   {siteConfig.name}
@@ -68,7 +67,7 @@ export default function LocationSection() {
               </div>
 
               {/* Botões de Ação do Endereço */}
-              <div className="flex flex-col sm:flex-row gap-3">
+              <div className="flex flex-col sm:flex-row gap-3 pt-1">
                 <a
                   href={siteConfig.address.googleMapsUrl}
                   target="_blank"
@@ -76,7 +75,7 @@ export default function LocationSection() {
                   className="flex-1 inline-flex items-center justify-center gap-2 bg-terracotta-600 hover:bg-terracotta-700 text-cream-50 py-3 px-4 rounded-md font-semibold text-sm transition-colors shadow-xs"
                 >
                   <Navigation className="w-4 h-4" />
-                  <span>Como chegar (Google Maps)</span>
+                  <span>Como chegar</span>
                 </a>
 
                 <button
@@ -101,7 +100,7 @@ export default function LocationSection() {
             </div>
 
             {/* Bloco de Horário de Funcionamento (Placeholder Preparado) */}
-            <div className="bg-cream-100/70 border border-borderWarm rounded-lg p-6 space-y-3">
+            <div className="bg-cream-100/70 border border-borderWarm rounded-lg p-5 space-y-2.5">
               <div className="flex items-center gap-2">
                 <Clock className="w-4 h-4 text-caramel-600" />
                 <h4 className="font-serif text-base font-bold text-brown-900">
@@ -117,30 +116,27 @@ export default function LocationSection() {
                 <p className="leading-relaxed">
                   {siteConfig.openingHoursPlaceholder.note}
                 </p>
-                <div className="pt-2">
+                <div className="pt-1.5">
                   <a
                     href={siteConfig.contacts.whatsappUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-terracotta-600 font-bold hover:underline inline-flex items-center gap-1"
                   >
-                    <span>Consultar horários de hoje pelo WhatsApp</span>
+                    <span>Falar no WhatsApp</span>
                     <span>→</span>
                   </a>
                 </div>
               </div>
             </div>
 
-            {/* Bloco de Contatos Oficiais (Seção 7) */}
-            <div id="contato" className="bg-brown-900 text-cream-50 rounded-lg p-6 sm:p-7 space-y-4 shadow-xs">
+            {/* Bloco de Contatos Oficiais */}
+            <div id="contato" className="bg-brown-900 text-cream-50 rounded-lg p-6 space-y-4 shadow-xs">
               <h4 className="font-serif text-lg font-bold text-caramel-400">
-                Canais de Contato Oficiais
+                Contatos
               </h4>
-              <p className="text-xs text-cream-100/80">
-                Clique nos canais abaixo para falar diretamente conosco:
-              </p>
 
-              <div className="space-y-3 pt-1">
+              <div className="space-y-2.5">
                 {/* WhatsApp */}
                 <a
                   href={siteConfig.contacts.whatsappUrl}
@@ -210,16 +206,16 @@ export default function LocationSection() {
                 <div className="flex items-center gap-2">
                   <MapPin className="w-4 h-4 text-terracotta-600" />
                   <span className="font-serif font-bold text-sm text-brown-900">
-                    Mapa de Acesso
+                    Como Chegar
                   </span>
                 </div>
                 <span className="text-xs text-brown-600">
-                  Parque Novo Mundo, Americana
+                  Rua Lindóia, 410 - Americana
                 </span>
               </div>
 
               {/* Embed do Google Maps */}
-              <div className="relative w-full h-[380px] sm:h-[460px] bg-cream-200">
+              <div className="relative w-full h-[380px] sm:h-[440px] bg-cream-200">
                 <iframe
                   title="Localização da Padaria Gustmann no Google Maps"
                   src="https://maps.google.com/maps?q=Rua+Lind%C3%B3ia,+410+-+Parque+Novo+Mundo,+Americana+-+SP,+13467-640&t=&z=16&ie=UTF8&iwloc=&output=embed"
@@ -231,9 +227,9 @@ export default function LocationSection() {
               </div>
 
               {/* Rodapé do Mapa */}
-              <div className="p-4 bg-cream-50 border-t border-borderWarm flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
+              <div className="p-4 bg-cream-50 border-t border-borderWarm flex items-center justify-between text-xs">
                 <span className="text-brown-700">
-                  Fácil acesso e estacionamento nas imediações.
+                  Parque Novo Mundo, Americana - SP
                 </span>
                 <a
                   href={siteConfig.address.googleMapsUrl}
@@ -241,7 +237,7 @@ export default function LocationSection() {
                   rel="noopener noreferrer"
                   className="font-bold text-terracotta-600 hover:text-terracotta-700 inline-flex items-center gap-1"
                 >
-                  <span>Abrir rotas no GPS</span>
+                  <span>Abrir no Google Maps</span>
                   <span>↗</span>
                 </a>
               </div>

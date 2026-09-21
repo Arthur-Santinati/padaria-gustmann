@@ -1,17 +1,17 @@
 import Link from "next/link";
 import { siteConfig } from "@/config/site-config";
-import { Instagram, MessageCircle, Mail, MapPin, Heart } from "lucide-react";
+import { Instagram, MessageCircle, Mail, MapPin } from "lucide-react";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
     <footer className="bg-brown-900 text-cream-100 border-t border-brown-800">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12 lg:py-14">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12">
           
-          {/* Coluna 1: Marca e Posicionamento */}
-          <div className="md:col-span-5 space-y-4">
+          {/* Coluna 1: Nome & Descrição Oficial */}
+          <div className="md:col-span-5 space-y-3">
             <Link href="#inicio" className="inline-block">
               <span className="font-serif text-2xl font-bold tracking-tight text-cream-50 hover:text-caramel-400 transition-colors">
                 {siteConfig.name}
@@ -21,8 +21,8 @@ export default function Footer() {
               </span>
             </Link>
             
-            <p className="text-sm text-cream-100/75 leading-relaxed max-w-sm">
-              {siteConfig.highlightPhrase}. Há {siteConfig.yearsOfTradition} anos servindo produtos fresquinhos e tradição para as famílias de Americana - SP.
+            <p className="text-sm text-cream-100/80 leading-relaxed max-w-sm">
+              {siteConfig.yearsOfTradition} anos de tradição levando pães fresquinhos todos os dias para as famílias de Americana - SP.
             </p>
 
             <div className="flex items-center gap-2 text-xs text-caramel-400/90 pt-1">
@@ -31,7 +31,7 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Coluna 2: Navegação Rápida */}
+          {/* Coluna 2: Navegação */}
           <div className="md:col-span-3 space-y-3">
             <h4 className="font-serif text-base font-bold text-cream-50">
               Navegação
@@ -44,31 +44,31 @@ export default function Footer() {
               </li>
               <li>
                 <Link href="#produtos" className="hover:text-caramel-400 transition-colors">
-                  Nossos Produtos
+                  Produtos
                 </Link>
               </li>
               <li>
                 <Link href="#sobre" className="hover:text-caramel-400 transition-colors">
-                  Sobre Nós (16 anos)
+                  Nossa História
                 </Link>
               </li>
               <li>
                 <Link href="#galeria" className="hover:text-caramel-400 transition-colors">
-                  Galeria de Fotos
+                  Galeria
                 </Link>
               </li>
               <li>
                 <Link href="#localizacao" className="hover:text-caramel-400 transition-colors">
-                  Localização e Como Chegar
+                  Localização
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Coluna 3: Canais e Contatos Oficiais */}
+          {/* Coluna 3: Contatos Oficiais */}
           <div className="md:col-span-4 space-y-3">
             <h4 className="font-serif text-base font-bold text-cream-50">
-              Contatos Oficiais
+              Contatos
             </h4>
             
             <div className="space-y-2.5 text-sm text-cream-100/80">
@@ -101,9 +101,7 @@ export default function Footer() {
               </a>
 
               <div className="pt-2 text-xs text-cream-100/60 leading-relaxed">
-                <p>{siteConfig.address.street}, {siteConfig.address.number}</p>
-                <p>{siteConfig.address.neighborhood} - {siteConfig.address.city} - {siteConfig.address.state}</p>
-                <p>CEP: {siteConfig.address.cep}</p>
+                <p>{siteConfig.address.fullAddress}</p>
               </div>
             </div>
           </div>
@@ -111,13 +109,12 @@ export default function Footer() {
         </div>
 
         {/* Linha Divisória e Copyright */}
-        <div className="mt-12 pt-6 border-t border-brown-800 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-cream-100/60">
+        <div className="mt-10 pt-6 border-t border-brown-800 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-cream-100/60">
           <p>
-            © {currentYear} {siteConfig.name} ({siteConfig.legalName}). Todos os direitos reservados.
+            © {currentYear} {siteConfig.name} | {siteConfig.tagline}. Todos os direitos reservados.
           </p>
-          <p className="flex items-center gap-1">
-            <span>Tradição e carinho feitos em Americana</span>
-            <Heart className="w-3.5 h-3.5 text-terracotta-500 fill-terracotta-500 inline" />
+          <p>
+            Americana - SP
           </p>
         </div>
 
