@@ -27,7 +27,7 @@ function run() {
   const sitemap = fs.readFileSync(sitemapPath, 'utf8');
 
   console.log('\n--- 1. TESTE DE LOGO OFICIAL ---');
-  assert(html.includes('/images/logo.jpg'), 'Logo oficial inserido no HTML');
+  assert(html.includes('/images/logo.png'), 'Logo oficial inserido no HTML');
 
   console.log('\n--- 2. TESTE DE HORÁRIOS CONFIRMADOS ---');
   assert(html.includes('06:00') && html.includes('19:00'), 'Horário de Segunda a Sexta (06h às 19h) presente');

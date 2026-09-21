@@ -21,9 +21,9 @@ export default function AboutSection() {
               
               {/* Selo Autêntico com Logo Oficial */}
               <div className="absolute bottom-3 left-3 bg-brown-950/90 backdrop-blur-xs border border-caramel-500/40 p-2 rounded flex items-center gap-2.5 text-cream-50 text-xs">
-                <div className="relative w-8 h-6 bg-white rounded p-0.5 shrink-0">
+                <div className="relative w-8 h-6 shrink-0">
                   <Image
-                    src="/images/logo.jpg"
+                    src="/images/logo.png"
                     alt="Logo Gustmann"
                     fill
                     className="object-contain"

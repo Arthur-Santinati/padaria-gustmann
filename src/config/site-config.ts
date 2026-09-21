@@ -53,7 +53,7 @@ export const siteConfig: SiteConfig = {
   description: "Padaria Gustmann em Americana - SP. Pães fresquinhos todos os dias, confeitaria e sabores feitos com tradição e qualidade com 16 anos de história.",
   yearsOfTradition: 16,
   highlightPhrase: "Qualidade e sabor que fazem a diferença",
-  logo: "/images/logo.jpg",
+  logo: "/images/logo.png",
   
   contacts: {
     phoneFormatted: "(19) 3645-7977",

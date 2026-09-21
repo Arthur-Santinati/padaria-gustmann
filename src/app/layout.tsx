@@ -24,6 +24,11 @@ export const metadata: Metadata = {
   authors: [{ name: "Padaria Gustmann" }],
   creator: "Padaria Gustmann",
   publisher: "Padaria Gustmann",
+  icons: {
+    icon: "/favicon.png",
+    shortcut: "/favicon.png",
+    apple: "/favicon.png",
+  },
   formatDetection: {
     telephone: true,
     address: true,
@@ -36,11 +41,20 @@ export const metadata: Metadata = {
     locale: "pt_BR",
     siteName: "Padaria Gustmann",
     url: "https://www.padariagustmann.com.br",
+    images: [
+      {
+        url: "https://www.padariagustmann.com.br/images/logo.png",
+        width: 1024,
+        height: 724,
+        alt: "Logo Padaria Gustmann",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Padaria Gustmann | Padaria e Confeitaria em Americana",
     description: "Padaria Gustmann em Americana - SP. Pães fresquinhos todos os dias, confeitaria e sabores que fazem a diferença.",
+    images: ["https://www.padariagustmann.com.br/images/logo.png"],
   },
   robots: {
     index: true,
@@ -57,7 +71,9 @@ export default function RootLayout({
     <html lang="pt-BR" className="scroll-smooth">
       <head>
         <StructuredData />
-        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+        <link rel="icon" href="/favicon.png" type="image/png" />
+        <link rel="shortcut icon" href="/favicon.png" type="image/png" />
+        <link rel="apple-touch-icon" href="/favicon.png" />
       </head>
       <body className="bg-cream-50 text-brown-900 selection:bg-caramel-400 selection:text-brown-950 min-h-screen flex flex-col">
         {children}

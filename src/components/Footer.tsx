@@ -14,9 +14,9 @@ export default function Footer() {
           {/* Coluna 1: Logo Oficial & Descrição */}
           <div className="md:col-span-5 space-y-4">
             <Link href="#inicio" className="flex items-center gap-3">
-              <div className="relative w-14 h-10 shrink-0 bg-white rounded p-0.5 border border-caramel-500/40">
+              <div className="relative w-14 h-10 shrink-0 ">
                 <Image
-                  src="/images/logo.jpg"
+                  src="/images/logo.png"
                   alt="Logo Padaria Gustmann"
                   fill
                   className="object-contain"

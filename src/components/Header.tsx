@@ -48,9 +48,9 @@ export default function Header() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between">
         {/* Logo Oficial com Imagem e Tipografia */}
         <Link href="#inicio" className="flex items-center gap-2.5 sm:gap-3 group">
-          <div className="relative w-12 h-9 sm:w-14 sm:h-10 shrink-0 bg-white rounded p-0.5 border border-borderWarm/80 shadow-2xs">
+          <div className="relative w-12 h-9 sm:w-14 sm:h-10 shrink-0 ">
             <Image
-              src="/images/logo.jpg"
+              src="/images/logo.png"
               alt="Logo oficial da Padaria Gustmann"
               fill
               className="object-contain"

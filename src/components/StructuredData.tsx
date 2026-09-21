@@ -8,8 +8,8 @@ export default function StructuredData() {
     "alternateName": siteConfig.legalName,
     "description": siteConfig.description,
     "url": "https://www.padariagustmann.com.br",
-    "logo": "https://www.padariagustmann.com.br/images/logo.jpg",
-    "image": "https://www.padariagustmann.com.br/images/logo.jpg",
+    "logo": "https://www.padariagustmann.com.br/images/logo.png",
+    "image": "https://www.padariagustmann.com.br/images/logo.png",
     "telephone": "+551936457977",
     "email": siteConfig.contacts.email,
     "address": {
