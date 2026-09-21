@@ -73,7 +73,7 @@ export default function MenuSection() {
                   className="bg-cream-50 border border-borderWarm rounded-lg overflow-hidden shadow-xs hover:border-caramel-400/80 transition-all flex flex-col group"
                 >
                   {/* Foto do Produto */}
-                  <div className="relative aspect-4/3 w-full overflow-hidden bg-brown-900">
+                  <div className="relative aspect-[4/3] w-full overflow-hidden bg-brown-900">
                     <Image
                       src={product.image}
                       alt={product.name}

@@ -85,7 +85,7 @@ export default function Hero() {
           {/* Lado Visual Fotográfico */}
           <div className="lg:col-span-5 relative">
             <div className="relative mx-auto max-w-md lg:max-w-none">
-              <div className="relative rounded-lg overflow-hidden border border-borderWarm shadow-xs aspect-4/5 sm:aspect-square lg:aspect-4/5 bg-brown-900">
+              <div className="relative rounded-lg overflow-hidden border border-borderWarm shadow-xs aspect-[4/5] sm:aspect-square lg:aspect-[4/5] bg-brown-900">
                 <Image
                   src="/images/hero-bread.jpg"
                   alt="Pães artesanais recém-saídos do forno na Padaria Gustmann"
