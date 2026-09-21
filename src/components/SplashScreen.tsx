@@ -5,25 +5,19 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function SplashScreen() {
-  const [visible, setVisible] = useState(false);
+  const [visible, setVisible] = useState(true);
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
-    // Verifica se o visitante já visualizou o splash nesta sessão
-    const seen = sessionStorage.getItem("gustmann_splash_seen");
-    if (!seen) {
-      setVisible(true);
-      const timer = setTimeout(() => {
-        setVisible(false);
-        sessionStorage.setItem("gustmann_splash_seen", "true");
-      }, 1500); // 1.5s de apresentação elegante e rápida
+    const timer = setTimeout(() => {
+      setVisible(false);
+    }, 1500); // 1.5s de apresentação elegante e legível
 
-      return () => clearTimeout(timer);
-    }
+    return () => clearTimeout(timer);
   }, []);
 
-  if (!mounted || !visible) return null;
+  if (!mounted) return null;
 
   return (
     <AnimatePresence>
@@ -31,7 +25,9 @@ export default function SplashScreen() {
         <motion.div
           key="splash"
           initial={{ opacity: 1 }}
-          exit={{ opacity: 0, transition: { duration: 0.6, ease: "easeInOut" } }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.8, ease: "easeInOut" }}
+          style={{ pointerEvents: visible ? "auto" : "none" }}
           className="fixed inset-0 z-[999] bg-[#180D09] flex flex-col items-center justify-center p-6 select-none"
         >
           {/* Brilho suave de forno ao fundo */}

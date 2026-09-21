@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
-import { Plus, Minus, ShoppingBag, ArrowRight, MessageCircle } from "lucide-react";
+import { Plus, Minus, ShoppingBag, ArrowRight, MessageCircle, ChevronDown, ChevronUp } from "lucide-react";
 import {
   menuCategories,
   menuProducts,
@@ -16,8 +16,10 @@ import {
 import { useCart } from "@/context/CartContext";
 
 export default function MenuSection() {
+  const INITIAL_VISIBLE_COUNT = 6;
   const [activeCategory, setActiveCategory] = useState("todos");
   const [activeSubcategory, setActiveSubcategory] = useState<string | null>(null);
+  const [isExpanded, setIsExpanded] = useState(false);
   const { addItem, updateQuantity, getItemQuantity, setIsCartOpen, totalLines, totalPrice } = useCart();
 
   // Subcategorias disponíveis para a categoria atual
@@ -37,9 +39,21 @@ export default function MenuSection() {
     return true;
   });
 
+  const hasMore = !isExpanded && filteredProducts.length > INITIAL_VISIBLE_COUNT;
+  const displayedProducts = hasMore
+    ? filteredProducts.slice(0, INITIAL_VISIBLE_COUNT)
+    : filteredProducts;
+  const remainingCount = filteredProducts.length - INITIAL_VISIBLE_COUNT;
+
   const handleCategoryChange = (catId: string) => {
     setActiveCategory(catId);
     setActiveSubcategory(null);
+    setIsExpanded(false);
+  };
+
+  const handleSubcategoryChange = (subId: string | null) => {
+    setActiveSubcategory(subId);
+    setIsExpanded(false);
   };
 
   return (
@@ -87,7 +101,7 @@ export default function MenuSection() {
           <div className="flex items-center justify-start sm:justify-center gap-2 overflow-x-auto pb-2 mb-8 no-scrollbar">
             <button
               type="button"
-              onClick={() => setActiveSubcategory(null)}
+              onClick={() => handleSubcategoryChange(null)}
               className={`px-3 py-1.5 rounded-md text-xs font-medium transition-colors border ${
                 activeSubcategory === null
                   ? "bg-brown-950 text-cream-50 border-brown-950"
@@ -103,7 +117,7 @@ export default function MenuSection() {
                 <button
                   key={sub.id}
                   type="button"
-                  onClick={() => setActiveSubcategory(sub.id)}
+                  onClick={() => handleSubcategoryChange(sub.id)}
                   className={`px-3 py-1.5 rounded-md text-xs font-medium transition-colors border ${
                     isSubActive
                       ? "bg-brown-950 text-cream-50 border-brown-950"
@@ -119,7 +133,7 @@ export default function MenuSection() {
 
         {/* Grid de Produtos */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredProducts.map((product) => {
+          {displayedProducts.map((product) => {
             const qty = getItemQuantity(product.id);
             const step = product.step || (product.quantityUnit === "KG" ? 0.5 : 1);
 
@@ -253,6 +267,47 @@ export default function MenuSection() {
             );
           })}
         </div>
+
+        {/* Botão Ver Mais Produtos / Expandir Cardápio */}
+        {hasMore && (
+          <div className="mt-10 flex flex-col items-center justify-center gap-3">
+            <button
+              type="button"
+              onClick={() => setIsExpanded(true)}
+              className="inline-flex items-center gap-2.5 bg-terracotta-600 hover:bg-terracotta-700 active:scale-98 text-cream-50 font-bold px-8 py-3.5 rounded-full shadow-md hover:shadow-lg transition-all text-sm sm:text-base group cursor-pointer"
+            >
+              <span>
+                {activeCategory === "todos"
+                  ? `Ver cardápio completo (+${remainingCount} opções)`
+                  : `Ver mais produtos (+${remainingCount} opções)`}
+              </span>
+              <ChevronDown className="w-4 h-4 group-hover:translate-y-0.5 transition-transform" />
+            </button>
+            <p className="text-xs text-brown-600 text-center max-w-md">
+              {activeCategory === "todos"
+                ? "Bolos recheados por quilo, centos de salgados assados e fritos, baguetes e docinhos artesanais."
+                : `Mostrando os primeiros ${INITIAL_VISIBLE_COUNT} de ${filteredProducts.length} itens desta categoria.`}
+            </p>
+          </div>
+        )}
+
+        {/* Botão Mostrar Menos quando expandido */}
+        {isExpanded && filteredProducts.length > INITIAL_VISIBLE_COUNT && (
+          <div className="mt-10 flex justify-center">
+            <button
+              type="button"
+              onClick={() => {
+                setIsExpanded(false);
+                const el = document.getElementById("cardapio");
+                if (el) el.scrollIntoView({ behavior: "smooth" });
+              }}
+              className="inline-flex items-center gap-2 bg-cream-50 hover:bg-cream-100 active:scale-98 text-brown-800 border border-borderWarm px-6 py-2.5 rounded-full text-xs sm:text-sm font-semibold shadow-2xs transition-all cursor-pointer"
+            >
+              <span>Mostrar menos produtos</span>
+              <ChevronUp className="w-4 h-4 text-terracotta-600" />
+            </button>
+          </div>
+        )}
 
         {/* Barra Flutuante de Resumo do Pedido (quando houver itens) */}
         {totalLines > 0 && (

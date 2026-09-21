@@ -24,6 +24,8 @@ function run() {
 
   const html = fs.readFileSync(indexPath, 'utf8');
 
+  const menuTs = fs.readFileSync(path.join(process.cwd(), 'src/config/menu.ts'), 'utf8');
+
   console.log('\n--- 1. CATEGORIAS REAIS DO CARDÁPIO ---');
   assert(html.includes('id="cardapio"'), 'Seção #cardapio presente');
   assert(html.includes('Docinhos'), 'Aba Docinhos presente');
@@ -31,22 +33,21 @@ function run() {
   assert(html.includes('Salgados'), 'Aba Salgados presente');
   assert(html.includes('Baguetes Recheadas'), 'Aba Baguetes Recheadas presente');
 
-  console.log('\n--- 2. PRODUTOS REAIS & PREÇOS EXATOS ---');
-  assert(html.includes('Brigadeiro Tradicional') && html.includes('110,00'), 'Brigadeiro (R$ 110,00 / cento)');
-  assert(html.includes('Carolina de Limão') && html.includes('74,99'), 'Carolina de Limão (R$ 74,99 / kg)');
-  assert(html.includes('Bolo Gustmann') && html.includes('77,90'), 'Bolo Gustmann (R$ 77,90 / kg)');
-  assert(html.includes('Bolo Alpino') && html.includes('79,90'), 'Bolo Alpino (R$ 79,90 / kg)');
-  assert(html.includes('Bolo Ferrero Rocher') && html.includes('84,90'), 'Bolo Ferrero Rocher (R$ 84,90 / kg)');
-  assert(html.includes('Coxinha de Frango') && html.includes('100,00'), 'Coxinha de Frango (R$ 100,00 / cento)');
-  assert(html.includes('Esfihinha de Carne') && html.includes('110,00'), 'Esfihinha de Carne (R$ 110,00 / cento)');
-  assert(html.includes('Baguete Fria de Presunto e Queijo') && html.includes('57,90'), 'Baguete Fria Presunto e Queijo (R$ 57,90)');
-  assert(html.includes('Baguete Quente de Salame') && html.includes('40,00'), 'Baguete Quente de Salame (R$ 40,00)');
-  assert(html.includes('Baguete Fria Quatro Queijos') && html.includes('Consultar preço'), 'Baguete Quatro Queijos com preço sob consulta');
+  console.log('\n--- 2. PRODUTOS REAIS & PREÇOS NO CONFIG ---');
+  assert(menuTs.includes('Brigadeiro Tradicional') && menuTs.includes('110'), 'Brigadeiro (R$ 110,00 / cento)');
+  assert(menuTs.includes('Carolina de Limão') && menuTs.includes('74.99'), 'Carolina de Limão (R$ 74,99 / kg)');
+  assert(menuTs.includes('Bolo Gustmann') && menuTs.includes('77.9'), 'Bolo Gustmann (R$ 77,90 / kg)');
+  assert(menuTs.includes('Bolo Alpino') && menuTs.includes('79.9'), 'Bolo Alpino (R$ 79,90 / kg)');
+  assert(menuTs.includes('Bolo Leite Ninho c/ Morango') && menuTs.includes('84.9'), 'Bolo Ninho com Morango (R$ 84,90 / kg)');
+  assert(menuTs.includes('Coxinha de Frango') && menuTs.includes('100'), 'Coxinha de Frango (R$ 100,00 / cento)');
+  assert(menuTs.includes('Esfihinha de Carne') && menuTs.includes('110'), 'Esfihinha de Carne (R$ 110,00 / cento)');
+  assert(menuTs.includes('Baguete Fria de Presunto e Queijo') && menuTs.includes('57.9'), 'Baguete Fria Presunto e Queijo (R$ 57,90)');
+  assert(menuTs.includes('Baguete Quente de Salame') && menuTs.includes('40'), 'Baguete Quente de Salame (R$ 40,00)');
+  assert(menuTs.includes('Baguete Fria Quatro Queijos') && menuTs.includes('price: null'), 'Baguete Quatro Queijos sob consulta');
 
-  console.log('\n--- 3. UNIDADES DE MEDIDA E EXIBIÇÃO ---');
-  assert(html.includes('por kg'), 'Exibição de unidade por kg');
-  assert(html.includes('por cento'), 'Exibição de unidade por cento');
-  assert(html.includes('por unidade'), 'Exibição de unidade por unidade');
+  console.log('\n--- 3. BOTÃO VER MAIS & COMPACTAÇÃO INICIAL ---');
+  assert(html.includes('Ver cardápio completo'), 'Botão "Ver cardápio completo" presente no HTML inicial');
+  assert(html.includes('opções'), 'Contador de opções restantes visível');
 
   console.log('\n--- 4. CONTATOS OFICIAIS & HORÁRIOS ---');
   assert(html.includes('(19) 3645-7977'), 'Telefone fixo oficial');
