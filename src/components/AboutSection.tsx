@@ -8,7 +8,7 @@ export default function AboutSection() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
           
-          {/* Coluna 1: Foto Real da Padaria (Fachada/Ambiente) */}
+          {/* Coluna 1: Foto da Padaria */}
           <div className="lg:col-span-6">
             <div className="relative rounded-lg overflow-hidden border border-borderWarm shadow-xs bg-brown-900 aspect-4/3 sm:aspect-16/11">
               <Image
@@ -19,10 +19,20 @@ export default function AboutSection() {
                 sizes="(max-width: 1024px) 100vw, 550px"
               />
               
-              {/* Selo Autêntico da Padaria */}
-              <div className="absolute bottom-3 left-3 bg-brown-950/85 backdrop-blur-xs border border-caramel-500/30 px-3 py-1.5 rounded text-cream-50 text-xs">
-                <span className="font-semibold text-caramel-400">Padaria Gustmann</span>
-                <span className="text-cream-100/70 ml-1.5">• Americana - SP</span>
+              {/* Selo Autêntico com Logo Oficial */}
+              <div className="absolute bottom-3 left-3 bg-brown-950/90 backdrop-blur-xs border border-caramel-500/40 p-2 rounded flex items-center gap-2.5 text-cream-50 text-xs">
+                <div className="relative w-8 h-6 bg-white rounded p-0.5 shrink-0">
+                  <Image
+                    src="/images/logo.jpg"
+                    alt="Logo Gustmann"
+                    fill
+                    className="object-contain"
+                  />
+                </div>
+                <div>
+                  <span className="font-semibold text-caramel-400 block leading-tight">Padaria Gustmann</span>
+                  <span className="text-cream-100/70 text-[10px]">Americana - SP</span>
+                </div>
               </div>
             </div>
           </div>

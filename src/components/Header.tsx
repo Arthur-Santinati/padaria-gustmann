@@ -2,8 +2,9 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { siteConfig } from "@/config/site-config";
-import { MapPin, Phone, MessageCircle, Menu, X } from "lucide-react";
+import { MapPin, Phone, MessageCircle, Menu, X, Clock } from "lucide-react";
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -11,7 +12,7 @@ export default function Header() {
   const navLinks = [
     { label: "Início", href: "#inicio" },
     { label: "Produtos", href: "#produtos" },
-    { label: "Sobre nós", href: "#sobre" },
+    { label: "Nossa História", href: "#sobre" },
     { label: "Galeria", href: "#galeria" },
     { label: "Localização", href: "#localizacao" },
     { label: "Contato", href: "#contato" },
@@ -19,7 +20,7 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 z-40 w-full bg-cream-50/95 backdrop-blur-sm border-b border-borderWarm shadow-xs">
-      {/* Top Bar Informativa */}
+      {/* Top Bar Informativa com Endereço, Fixo e Horário */}
       <div className="bg-brown-950 text-cream-100 text-xs py-2 px-4 sm:px-6">
         <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
           <div className="flex items-center gap-2">
@@ -27,6 +28,11 @@ export default function Header() {
             <span className="truncate">Rua Lindóia, 410 - Parque Novo Mundo, Americana - SP</span>
           </div>
           <div className="flex items-center gap-4">
+            <div className="hidden md:flex items-center gap-1.5 text-cream-100/90">
+              <Clock className="w-3.5 h-3.5 text-caramel-400" />
+              <span>Seg a Sex: 06h às 19h | Sáb: 06h às 18h | Dom: 06h30 às 12h</span>
+            </div>
+            <span className="hidden md:inline text-brown-600">|</span>
             <a
               href={`tel:+${siteConfig.contacts.phoneRaw}`}
               className="flex items-center gap-1.5 hover:text-caramel-400 transition-colors"
@@ -34,24 +40,31 @@ export default function Header() {
               <Phone className="w-3.5 h-3.5 text-caramel-400" />
               <span>{siteConfig.contacts.phoneFormatted}</span>
             </a>
-            <span className="hidden md:inline text-brown-600">|</span>
-            <span className="hidden md:inline text-caramel-400 font-medium">
-              16 anos de tradição
-            </span>
           </div>
         </div>
       </div>
 
-      {/* Navegação Principal */}
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 py-3.5 flex items-center justify-between">
-        {/* Logo / Marca */}
-        <Link href="#inicio" className="flex flex-col group">
-          <span className="font-serif text-2xl sm:text-2xl font-bold tracking-tight text-brown-900 group-hover:text-terracotta-600 transition-colors">
-            {siteConfig.name}
-          </span>
-          <span className="text-[11px] tracking-widest uppercase font-semibold text-terracotta-600">
-            {siteConfig.tagline}
-          </span>
+      {/* Navegação Principal com Logo Oficial */}
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between">
+        {/* Logo Oficial com Imagem e Tipografia */}
+        <Link href="#inicio" className="flex items-center gap-2.5 sm:gap-3 group">
+          <div className="relative w-12 h-9 sm:w-14 sm:h-10 shrink-0 bg-white rounded p-0.5 border border-borderWarm/80 shadow-2xs">
+            <Image
+              src="/images/logo.jpg"
+              alt="Logo oficial da Padaria Gustmann"
+              fill
+              className="object-contain"
+              priority
+            />
+          </div>
+          <div className="flex flex-col">
+            <span className="font-serif text-lg sm:text-2xl font-bold tracking-tight text-brown-950 group-hover:text-terracotta-600 transition-colors leading-tight">
+              {siteConfig.name}
+            </span>
+            <span className="text-[10px] sm:text-[11px] tracking-widest uppercase font-semibold text-terracotta-600">
+              {siteConfig.tagline}
+            </span>
+          </div>
         </Link>
 
         {/* Links Desktop */}

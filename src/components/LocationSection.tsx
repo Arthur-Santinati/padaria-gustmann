@@ -42,7 +42,7 @@ export default function LocationSection() {
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           
-          {/* Card de Informações e Endereço */}
+          {/* Card de Informações, Endereço e Horários */}
           <div className="lg:col-span-6 space-y-6">
             
             {/* Bloco de Endereço */}
@@ -99,45 +99,40 @@ export default function LocationSection() {
               </div>
             </div>
 
-            {/* Bloco de Horário de Funcionamento (Placeholder Preparado) */}
-            <div className="bg-cream-100/70 border border-borderWarm rounded-lg p-5 space-y-2.5">
-              <div className="flex items-center gap-2">
-                <Clock className="w-4 h-4 text-caramel-600" />
-                <h4 className="font-serif text-base font-bold text-brown-900">
-                  Horário de Atendimento
-                </h4>
+            {/* Bloco de Horário de Funcionamento Oficial Confirmado */}
+            <div className="bg-cream-100/70 border border-borderWarm rounded-lg p-6 space-y-4 shadow-xs">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <Clock className="w-4 h-4 text-terracotta-600" />
+                  <h4 className="font-serif text-base font-bold text-brown-900">
+                    Horário de Atendimento
+                  </h4>
+                </div>
+                <span className="text-[11px] font-semibold uppercase tracking-wider text-caramel-600 bg-cream-50 px-2 py-0.5 rounded border border-borderWarm">
+                  Fornadas diárias
+                </span>
               </div>
 
-              <div className="p-3.5 bg-cream-50 rounded border border-dashed border-caramel-400/60 text-xs text-brown-700 space-y-1.5">
-                <div className="flex items-center gap-1.5 text-caramel-700 font-semibold">
-                  <span className="inline-block w-2 h-2 rounded-full bg-caramel-500 animate-pulse" />
-                  <span>{siteConfig.openingHoursPlaceholder.status}</span>
-                </div>
-                <p className="leading-relaxed">
-                  {siteConfig.openingHoursPlaceholder.note}
-                </p>
-                <div className="pt-1.5">
-                  <a
-                    href={siteConfig.contacts.whatsappUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-terracotta-600 font-bold hover:underline inline-flex items-center gap-1"
-                  >
-                    <span>Falar no WhatsApp</span>
-                    <span>→</span>
-                  </a>
-                </div>
+              <div className="divide-y divide-borderWarm/70 text-sm bg-cream-50 rounded-md border border-borderWarm overflow-hidden">
+                {siteConfig.openingHours.schedule.map((item, idx) => (
+                  <div key={idx} className="flex items-center justify-between p-3 text-brown-900">
+                    <span className="font-medium text-brown-800">{item.days}</span>
+                    <span className="font-semibold text-brown-950 font-mono text-xs sm:text-sm bg-cream-100/60 px-2 py-1 rounded">
+                      {item.hours}
+                    </span>
+                  </div>
+                ))}
               </div>
             </div>
 
             {/* Bloco de Contatos Oficiais */}
             <div id="contato" className="bg-brown-900 text-cream-50 rounded-lg p-6 space-y-4 shadow-xs">
               <h4 className="font-serif text-lg font-bold text-caramel-400">
-                Contatos
+                Contatos Oficiais
               </h4>
 
               <div className="space-y-2.5">
-                {/* WhatsApp */}
+                {/* WhatsApp & Telefone Fixo */}
                 <a
                   href={siteConfig.contacts.whatsappUrl}
                   target="_blank"
@@ -149,7 +144,25 @@ export default function LocationSection() {
                   </div>
                   <div className="min-w-0">
                     <span className="text-[11px] uppercase font-semibold text-caramel-400 block">
-                      WhatsApp
+                      WhatsApp e Telefone Fixo
+                    </span>
+                    <span className="text-sm font-semibold text-cream-50 group-hover:text-caramel-300 transition-colors truncate block">
+                      {siteConfig.contacts.phoneFormatted}
+                    </span>
+                  </div>
+                </a>
+
+                {/* Ligação Direta Fixo */}
+                <a
+                  href={`tel:+${siteConfig.contacts.phoneRaw}`}
+                  className="flex items-center gap-3 p-3 rounded bg-brown-800/80 hover:bg-brown-800 border border-brown-700 transition-colors group"
+                >
+                  <div className="p-2 rounded bg-brown-700 text-caramel-400 shrink-0">
+                    <Phone className="w-4 h-4" />
+                  </div>
+                  <div className="min-w-0">
+                    <span className="text-[11px] uppercase font-semibold text-caramel-400 block">
+                      Ligar para o Balcão (Telefone Fixo)
                     </span>
                     <span className="text-sm font-semibold text-cream-50 group-hover:text-caramel-300 transition-colors truncate block">
                       {siteConfig.contacts.phoneFormatted}
