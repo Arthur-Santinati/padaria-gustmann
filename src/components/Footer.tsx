@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Image from "next/image";
 import { siteConfig } from "@/config/site-config";
 import { Instagram, MessageCircle, Mail, MapPin, Phone, Clock } from "lucide-react";
 
@@ -11,25 +10,15 @@ export default function Footer() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12">
           
-          {/* Coluna 1: Logo Oficial & Descrição */}
-          <div className="md:col-span-5 space-y-4">
-            <Link href="#inicio" className="flex items-center gap-3">
-              <div className="relative w-14 h-10 shrink-0 ">
-                <Image
-                  src="/images/logo.png"
-                  alt="Logo Padaria Gustmann"
-                  fill
-                  className="object-contain"
-                />
-              </div>
-              <div>
-                <span className="font-serif text-xl font-bold tracking-tight text-cream-50 hover:text-caramel-400 transition-colors block leading-tight">
-                  {siteConfig.name}
-                </span>
-                <span className="text-[10px] uppercase tracking-widest font-semibold text-caramel-400">
-                  {siteConfig.tagline}
-                </span>
-              </div>
+          {/* Coluna 1: Nome Oficial & Descrição */}
+          <div className="md:col-span-5 space-y-3">
+            <Link href="#inicio" className="inline-block">
+              <span className="font-serif text-2xl font-bold tracking-tight text-cream-50 hover:text-caramel-400 transition-colors block leading-tight">
+                {siteConfig.name}
+              </span>
+              <span className="block text-xs uppercase tracking-widest font-semibold text-caramel-400 mt-0.5">
+                {siteConfig.tagline}
+              </span>
             </Link>
             
             <p className="text-sm text-cream-100/80 leading-relaxed max-w-sm">

@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
-import { siteConfig } from "@/config/site-config";
 import StructuredData from "@/components/StructuredData";
 import WhatsAppFloatingButton from "@/components/WhatsAppFloatingButton";
 
@@ -25,9 +24,7 @@ export const metadata: Metadata = {
   creator: "Padaria Gustmann",
   publisher: "Padaria Gustmann",
   icons: {
-    icon: "/favicon.png",
-    shortcut: "/favicon.png",
-    apple: "/favicon.png",
+    icon: "/favicon.svg",
   },
   formatDetection: {
     telephone: true,
@@ -41,20 +38,11 @@ export const metadata: Metadata = {
     locale: "pt_BR",
     siteName: "Padaria Gustmann",
     url: "https://www.padariagustmann.com.br",
-    images: [
-      {
-        url: "https://www.padariagustmann.com.br/images/logo.png",
-        width: 1024,
-        height: 724,
-        alt: "Logo Padaria Gustmann",
-      },
-    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Padaria Gustmann | Padaria e Confeitaria em Americana",
     description: "Padaria Gustmann em Americana - SP. Pães fresquinhos todos os dias, confeitaria e sabores que fazem a diferença.",
-    images: ["https://www.padariagustmann.com.br/images/logo.png"],
   },
   robots: {
     index: true,
@@ -71,9 +59,7 @@ export default function RootLayout({
     <html lang="pt-BR" className="scroll-smooth">
       <head>
         <StructuredData />
-        <link rel="icon" href="/favicon.png" type="image/png" />
-        <link rel="shortcut icon" href="/favicon.png" type="image/png" />
-        <link rel="apple-touch-icon" href="/favicon.png" />
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
       </head>
       <body className="bg-cream-50 text-brown-900 selection:bg-caramel-400 selection:text-brown-950 min-h-screen flex flex-col">
         {children}
