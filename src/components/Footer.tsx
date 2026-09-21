@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { siteConfig } from "@/config/site-config";
-import { Instagram, MessageCircle, Mail, MapPin, Phone, Clock } from "lucide-react";
+import { Instagram, MessageCircle, Mail, MapPin, Phone, Clock, ShoppingBag } from "lucide-react";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -10,8 +10,8 @@ export default function Footer() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12">
           
-          {/* Coluna 1: Nome Oficial & Descrição */}
-          <div className="md:col-span-5 space-y-3">
+          {/* Coluna 1: Nome Oficial, Descrição e Convite ao Cardápio */}
+          <div className="md:col-span-5 space-y-3.5">
             <Link href="#inicio" className="inline-block">
               <span className="font-serif text-2xl font-bold tracking-tight text-cream-50 hover:text-caramel-400 transition-colors block leading-tight">
                 {siteConfig.name}
@@ -25,7 +25,12 @@ export default function Footer() {
               {siteConfig.yearsOfTradition} anos de tradição levando pães fresquinhos todos os dias para as famílias de Americana - SP.
             </p>
 
-            <div className="space-y-1.5 text-xs text-cream-100/70 pt-1">
+            <p className="text-xs text-caramel-400/90 font-medium pt-0.5 flex items-center gap-1.5">
+              <ShoppingBag className="w-3.5 h-3.5 shrink-0" />
+              <span>Confira nosso cardápio e faça seu pedido pelo WhatsApp.</span>
+            </p>
+
+            <div className="space-y-1.5 text-xs text-cream-100/70 pt-2">
               <div className="flex items-center gap-2">
                 <MapPin className="w-3.5 h-3.5 text-caramel-400 shrink-0" />
                 <span>Rua Lindóia, 410 - Parque Novo Mundo, Americana - SP</span>
@@ -49,8 +54,8 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="#produtos" className="hover:text-caramel-400 transition-colors">
-                  Produtos
+                <Link href="#cardapio" className="hover:text-caramel-400 transition-colors font-medium text-caramel-300">
+                  Cardápio Digital
                 </Link>
               </li>
               <li>

@@ -1,14 +1,13 @@
 import Image from "next/image";
-import { siteConfig } from "@/config/site-config";
 import { Check } from "lucide-react";
 
 export default function AboutSection() {
   return (
-    <section id="sobre" className="py-16 sm:py-20 bg-cream-50 border-b border-borderWarm overflow-hidden">
+    <section id="sobre" className="py-16 sm:py-20 bg-cream-50 border-b border-borderWarm overflow-hidden scroll-mt-20">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
           
-          {/* Coluna 1: Foto da Padaria */}
+          {/* Coluna 1: Foto Real da Padaria */}
           <div className="lg:col-span-6">
             <div className="relative rounded-lg overflow-hidden border border-borderWarm shadow-xs bg-brown-900 aspect-4/3 sm:aspect-16/11">
               <Image
@@ -30,7 +29,7 @@ export default function AboutSection() {
           {/* Coluna 2: Texto da História */}
           <div className="lg:col-span-6 space-y-5">
             <div className="inline-block text-xs font-bold uppercase tracking-widest text-terracotta-600">
-              Nossa História
+              Nossa história
             </div>
 
             <h2 className="font-serif text-3xl sm:text-4xl text-brown-950 font-bold tracking-tight leading-tight">
@@ -46,8 +45,8 @@ export default function AboutSection() {
               </p>
             </div>
 
-            {/* Destaques Confirmados */}
-            <div className="pt-3 border-t border-borderWarm/80 space-y-2.5 text-sm text-brown-900">
+            {/* Destaques Confirmados (Sem nenhuma linha/timeline solta) */}
+            <div className="pt-2 space-y-2.5 text-sm text-brown-900">
               <div className="flex items-center gap-2.5">
                 <span className="flex items-center justify-center w-5 h-5 rounded-full bg-caramel-100 text-caramel-700 shrink-0">
                   <Check className="w-3.5 h-3.5" />

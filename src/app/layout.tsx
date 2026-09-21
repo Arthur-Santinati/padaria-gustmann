@@ -1,6 +1,9 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import StructuredData from "@/components/StructuredData";
+import Providers from "@/components/Providers";
+import SplashScreen from "@/components/SplashScreen";
+import CartDrawer from "@/components/CartDrawer";
 import WhatsAppFloatingButton from "@/components/WhatsAppFloatingButton";
 
 export const viewport: Viewport = {
@@ -18,7 +21,8 @@ export const metadata: Metadata = {
     "Confeitaria em Americana",
     "Pão francês fresquinho",
     "Parque Novo Mundo Americana",
-    "Padaria tradicional Americana SP",
+    "Cardápio Padaria Gustmann",
+    "Encomenda de bolo Americana",
   ],
   authors: [{ name: "Padaria Gustmann" }],
   creator: "Padaria Gustmann",
@@ -61,9 +65,13 @@ export default function RootLayout({
         <StructuredData />
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
       </head>
-      <body className="bg-cream-50 text-brown-900 selection:bg-caramel-400 selection:text-brown-950 min-h-screen flex flex-col">
-        {children}
-        <WhatsAppFloatingButton />
+      <body className="bg-cream-50 text-brown-900 selection:bg-caramel-400 selection:text-brown-950 min-h-screen flex flex-col antialiased">
+        <Providers>
+          <SplashScreen />
+          {children}
+          <CartDrawer />
+          <WhatsAppFloatingButton />
+        </Providers>
       </body>
     </html>
   );

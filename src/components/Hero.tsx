@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { siteConfig } from "@/config/site-config";
-import { MessageCircle, MapPin, Award, Check } from "lucide-react";
+import { MessageCircle, Award, Check, ArrowRight } from "lucide-react";
 
 export default function Hero() {
   return (
@@ -68,18 +68,17 @@ export default function Hero() {
               </a>
 
               <Link
-                href="#localizacao"
+                href="#cardapio"
                 className="inline-flex items-center justify-center gap-2 bg-cream-100 hover:bg-cream-200 border border-borderWarm text-brown-900 px-6 py-3.5 rounded-md font-medium text-base transition-colors"
               >
-                <MapPin className="w-4 h-4 text-caramel-600" />
-                <span>Como chegar</span>
+                <span>Ver nosso cardápio</span>
+                <ArrowRight className="w-4 h-4 text-caramel-600" />
               </Link>
             </div>
 
             {/* Endereço de apoio */}
-            <p className="text-xs text-brown-600 flex items-center gap-1.5 pt-0.5">
-              <MapPin className="w-3.5 h-3.5 text-brown-500 shrink-0" />
-              <span>Rua Lindóia, 410 - Parque Novo Mundo, Americana - SP</span>
+            <p className="text-xs text-brown-600 pt-0.5">
+              Rua Lindóia, 410 - Parque Novo Mundo, Americana - SP
             </p>
           </div>
 

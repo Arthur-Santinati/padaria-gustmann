@@ -5,7 +5,7 @@ import { MessageCircle } from "lucide-react";
 
 export default function WhatsAppFloatingButton() {
   return (
-    <aside aria-label="Atendimento rápido WhatsApp" className="fixed bottom-5 right-5 z-50">
+    <aside aria-label="Atendimento rápido WhatsApp" className="fixed bottom-5 right-5 z-30">
       <a
         href={siteConfig.contacts.whatsappUrl}
         target="_blank"
